@@ -74,11 +74,8 @@ def get_progress_info():
             ' ', progressbar.AdaptiveETA(),
         ])
         def _callback(total_size, completed):
-            if not hasattr(bar, "next_update"):
-                if hasattr(bar, "maxval"):
-                    bar.maxval = total_size
-                else:
-                    bar.max_value = total_size
+            if bar.max_value is None:
+                bar.max_value = total_size
                 bar.start()
             bar.update(completed)
         def _finish():
